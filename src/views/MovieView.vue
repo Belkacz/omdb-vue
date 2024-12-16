@@ -50,6 +50,7 @@ const updateSearchPhrase = (newSearchPhrase: string) => {
     display: flex;
     align-items: center;
     flex-direction: column;
+    align-self: start;
 }
 
 .movies-container {

@@ -3,7 +3,7 @@ const BASE_URL = 'http://www.omdbapi.com/';
 
 export const fetchMovies = async (searchPhrase: string) => {
     try {
-        const response = await fetch(`${BASE_URL}?apikey=${API_KEY}&s=${encodeURIComponent(searchPhrase)}`);
+        const response = await fetch(`${BASE_URL}?apikey=${API_KEY}&s=${searchPhrase}&page=1`);
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
         }
@@ -40,3 +40,22 @@ export const fetchMovies = async (searchPhrase: string) => {
 //       isLoading.value = false;
 //     }
 //   };
+
+
+export const getMovieByID = async (id: string) => {
+    try {
+      const response = await fetch(`${BASE_URL}?apikey=${API_KEY}&i=${id}&plot=full`);
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+      const dataJson = await response.json();
+      if (dataJson.Response === 'True') {
+        return dataJson;
+    } else {
+        throw dataJson.Error || 'Unknown error';
+    }
+    } catch (error) {
+      console.error("Error fetching movie details:", error);
+      throw error;
+    }
+  };

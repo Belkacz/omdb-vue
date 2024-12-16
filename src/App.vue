@@ -28,6 +28,7 @@ const searchMovies = async (newSearchPhrase: string) => {
       movieData.value = results;
     } catch (error: any) {
       errorMessage.value = error.message || 'Unknown error occurred'
+      console.log("my errorm = " +error)
     } finally {
       isLoading.value = false;
     }
